@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pediatric Nursing Flashcards - Chapter 26: Respiratory Dysfunction</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            height: 96vh;
+            background: #f4fdff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 150, 136, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid #00BCD4;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #00BCD4, #00838F);
+            color: #e0f7fa;
+            padding: 12px 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M30,30 Q40,20 50,30 Q60,20 70,30 Q80,40 70,50 Q80,60 70,70 Q60,80 50,70 Q40,80 30,70 Q20,60 30,50 Q20,40 30,30 Z" fill="white"/><path d="M35,35 Q45,25 50,35 Q55,25 65,35 Q70,45 65,55 Q55,65 50,55 Q45,65 35,55 Q30,45 35,35 Z" fill="white"/><circle cx="45" cy="40" r="3" fill="white"/><circle cx="55" cy="40" r="3" fill="white"/><circle cx="45" cy="60" r="3" fill="white"/><circle cx="55" cy="60" r="3" fill="white"/></svg>');
+            background-size: 80px 80px;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+            position: relative;
+            color: #e0f7fa;
+            line-height: 1.2;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.95;
+            position: relative;
+            color: #b2ebf2;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .progress {
+            background: #00BCD4;
+            height: 6px;
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #4DD0E1, #00BCD4);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .section-nav {
+            display: flex;
+            gap: 6px;
+            padding: 8px 10px;
+            background: linear-gradient(135deg, #0097A7, #00BCD4);
+            border-bottom: 1px solid #80DEEA;
+            flex-shrink: 0;
+            overflow-x: auto;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-btn {
+            padding: 5px 10px;
+            border: 2px solid #80DEEA;
+            background: rgba(255, 255, 255, 0.95);
+            color: #0097A7;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .section-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 188, 212, 0.4);
+        }
+        
+        .section-btn.active {
+            background: linear-gradient(135deg, #B2EBF2, #80DEEA);
+            color: #006064;
+            border-color: #0097A7;
+            box-shadow: 0 6px 12px rgba(0, 188, 212, 0.5);
+        }
+        
+        .flashcard {
+            padding: 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f4fdff;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .question-container {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            border-left: 6px solid #80DEEA;
+            box-shadow: 0 4px 8px rgba(0, 188, 212, 0.1);
+            flex-shrink: 0;
+        }
+        
+        .question-icon {
+            background: linear-gradient(135deg, #0097A7, #00BCD4);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(0, 151, 167, 0.4);
+        }
+        
+        .question {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #00838F;
+            flex-grow: 1;
+            font-weight: 500;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        .multiple-select-indicator {
+            background: #00BCD4;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 6px;
+            white-space: nowrap;
+            box-shadow: 0 3px 6px rgba(0, 188, 212, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 8px;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .option {
+            padding: 8px 10px;
+            border: 2px solid #B2EBF2;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.85rem;
+            line-height: 1.3;
+            flex-shrink: 0;
+            min-height: 45px;
+        }
+        
+        .option:hover {
+            background: #e0f7fa;
+            border-color: #80DEEA;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(128, 222, 234, 0.2);
+        }
+        
+        .option-letter {
+            background: #B2EBF2;
+            color: #0097A7;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            border: 2px solid #80DEEA;
+        }
+        
+        /* CORRECT - ALWAYS TEAL */
+        .option.correct {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .option.correct .option-letter {
+            background: #17a2b8;
+            color: white;
+            border-color: #17a2b8;
+        }
+        
+        /* INCORRECT - ALWAYS RED */
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .option.incorrect .option-letter {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+        
+        .option.selected {
+            background: #e0f7fa;
+            border-color: #80DEEA;
+            color: #0097A7;
+        }
+        
+        .option.selected .option-letter {
+            background: #80DEEA;
+            color: #0097A7;
+            border-color: #00BCD4;
+        }
+        
+        .feedback {
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .feedback.correct {
+            background: #d1ecf1;
+            border: 3px solid #17a2b8;
+            color: #0c5460;
+            display: flex;
+        }
+        
+        .feedback.incorrect {
+            background: #f8d7da;
+            border: 3px solid #dc3545;
+            color: #721c24;
+            display: flex;
+        }
+        
+        .feedback-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: #B2EBF2;
+            border-top: 2px solid #80DEEA;
+            flex-shrink: 0;
+            gap: 8px;
+        }
+        
+        .counter {
+            font-weight: bold;
+            color: #0097A7;
+            font-size: 0.9rem;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 2px solid #80DEEA;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0097A7, #00BCD4);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 151, 167, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #00BCD4, #0097A7);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 188, 212, 0.4);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #FFC107, #FF9800);
+            color: #212529;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(255, 193, 7, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #F44336, #D32F2F);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(244, 67, 54, 0.4);
+        }
+        
+        .rationale {
+            background: linear-gradient(135deg, #FFF3CD, #FFEEAA);
+            border: 3px solid #FFC107;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 8px;
+            display: none;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+            flex-shrink: 0;
+            overflow: hidden;
+            max-height: 120px;
+        }
+        
+        .rationale.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .rationale h4 {
+            color: #FF9800;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .rationale p {
+            color: #856404;
+            line-height: 1.4;
+            font-size: 0.8rem;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stats {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 4px;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+        
+        .stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cancel-selection {
+            background: linear-gradient(135deg, #F44336, #D32F2F);
+            color: white;
+            margin: 0 auto 8px auto;
+            display: none;
+            box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .cancel-selection:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(244, 67, 54, 0.4);
+        }
+        
+        .cancel-selection.show {
+            display: flex;
+        }
+        
+        .multiple-select-instructions {
+            text-align: center;
+            color: #0097A7;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            background: #FFF3CD;
+            padding: 6px;
+            border-radius: 8px;
+            border: 2px solid #FFEEAA;
+            flex-shrink: 0;
+        }
+        
+        .matching-container {
+            background: linear-gradient(135deg, #f4fdff, #e0f7fa);
+            border-radius: 8px;
+            padding: 10px;
+            border: 2px solid #B2EBF2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .matching-question {
+            font-size: 0.85rem;
+            color: #00838F;
+            font-weight: 500;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #B2EBF2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            max-height: 3em;
+            flex-shrink: 0;
+        }
+        
+        .matching-options {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 5px;
+            overflow: hidden;
+            padding: 2px;
+            min-height: 0;
+        }
+        
+        .matching-option {
+            padding: 8px;
+            border: 2px dashed #80DEEA;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #00BCD4;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            overflow: hidden;
+            line-height: 1.2;
+        }
+        
+        .matching-option:hover {
+            background: #e0f7fa;
+            border-style: solid;
+            border-color: #80DEEA;
+        }
+        
+        .matching-option.correct {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border-color: #17a2b8;
+            border-style: solid;
+            color: #0c5460;
+        }
+        
+        .matching-option.incorrect {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border-color: #dc3545;
+            border-style: solid;
+            color: #721c24;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* Remove all scrollbars */
+        .options,
+        .matching-options,
+        .rationale,
+        .container,
+        .flashcard,
+        body {
+            overflow: hidden !important;
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+        
+        .options::-webkit-scrollbar,
+        .matching-options::-webkit-scrollbar,
+        .rationale::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                height: 98vh;
+            }
+            
+            .section-btn {
+                min-width: 100px;
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+            
+            .matching-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 10px 12px;
+            }
+            
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            
+            .navigation {
+                padding: 8px 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 6px;
+            }
+            
+            .counter {
+                order: -1;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 4px;
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .question {
+                font-size: 0.85rem;
+            }
+            
+            .option {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+                min-height: 40px;
+            }
+            
+            .question-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .option-letter {
+                width: 22px;
+                height: 22px;
+                font-size: 0.75rem;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .container {
+                height: 99vh;
+            }
+            
+            .header {
+                padding: 8px 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.1rem;
+            }
+            
+            .header .subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .question-container {
+                padding: 10px;
+                margin-bottom: 6px;
+            }
+            
+            .question {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+            
+            .option {
+                padding: 6px 8px;
+                min-height: 35px;
+                font-size: 0.75rem;
+            }
+            
+            .navigation {
+                padding: 6px 8px;
+            }
+            
+            .rationale {
+                max-height: 80px;
+                padding: 8px;
+            }
+            
+            .feedback {
+                padding: 6px 8px;
+                font-size: 0.75rem;
+            }
+            
+            .option-letter {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+            
+            .stats {
+                display: none;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            .question-container {
+                padding: 8px;
+            }
+            
+            .question-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            
+            .option {
+                min-height: 30px;
+                padding: 4px 6px;
+                font-size: 0.7rem;
+            }
+            
+            .option-letter {
+                width: 18px;
+                height: 18px;
+                font-size: 0.65rem;
+            }
+            
+            .btn {
+                padding: 5px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .rationale {
+                max-height: 60px;
+                padding: 6px;
+            }
+            
+            .rationale p {
+                font-size: 0.7rem;
+                line-height: 1.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌬️ Chapter 26: The Child with Respiratory Dysfunction</h1>
+            <div class="subtitle">Respiratory Disorders & Breathing Conditions - Lungs & Airway Theme</div>
+            <div class="stats">
+                <div class="stat">📚 58 MC Questions</div>
+                <div class="stat">🌬️ Respiratory Disorders</div>
+                <div class="stat">🫁 Asthma & Cystic Fibrosis</div>
+                <div class="stat">💊 IV Calculations</div>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="section-nav">
+            <button class="section-btn active" onclick="setSection('multiple-choice')">Multiple Choice (58)</button>
+            <button class="section-btn" onclick="setSection('calculations')">IV Calculations (4)</button>
+            <button class="section-btn" onclick="setSection('all')">All Mixed (62)</button>
+        </div>
+        
+        <div class="flashcard">
+            <div class="question-container">
+                <div class="question-icon" id="questionNumber">1</div>
+                <div class="question" id="question"></div>
+                <div class="multiple-select-indicator" id="multipleSelectIndicator" style="display: none;">Multiple Answers</div>
+            </div>
+            
+            <div class="multiple-select-instructions" id="multipleSelectInstructions" style="display: none;">
+                💡 Select ALL correct answers
+            </div>
+            
+            <div class="options" id="options"></div>
+            
+            <button class="btn cancel-selection" id="cancelBtn" onclick="cancelSelection()">
+                🔄 Reset
+            </button>
+            
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>💡 Rationale:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">
+                ⬅️ Prev
+            </button>
+            <div class="counter" id="counter">1/58</div>
+            <button class="btn btn-warning" id="submitBtn" onclick="submitAnswer()" style="display: none;">
+                ✅ Submit
+            </button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Chapter 26 Data - The Child with Respiratory Dysfunction
+        const sections = {
+            'multiple-choice': [
+                {
+                    question: "Why are cool-mist vaporizers rather than steam vaporizers recommended in the home treatment of respiratory infections?",
+                    options: [
+                        "They are safer.",
+                        "They are less expensive.",
+                        "Respiratory secretions are dried by steam vaporizers.",
+                        "A more comfortable environment is produced."
+                    ],
+                    correct: 0,
+                    rationale: "Cool-mist vaporizers are safer than steam vaporizers, and little evidence exists to show any advantages to steam. The cost of cool-mist and steam vaporizers is comparable. Steam loosens secretions, not dries them. Both cool-mist and steam vaporizers may promote a more comfortable environment, but cool-mist vaporizers have decreased risk for burns and growth of organisms."
+                },
+                {
+                    question: "Decongestant nose drops are recommended for a 10-month-old infant with an upper respiratory tract infection. Instructions for nose drops should include which information?",
+                    options: [
+                        "Do not use for more than 3 days.",
+                        "Keep drops to use again for nasal congestion.",
+                        "Administer drops after feedings and at bedtime.",
+                        "Give two drops every 5 minutes until nasal congestion subsides."
+                    ],
+                    correct: 0,
+                    rationale: "Vasoconstrictive nose drops such as Neo-Synephrine should not be used for more than 3 days to avoid rebound congestion. Drops should be discarded after one illness and not used for other children because they may become contaminated with bacteria. Drops administered before feedings are more helpful. Two drops are administered to cause vasoconstriction in the anterior mucous membranes. An additional two drops are instilled 5 to 10 minutes later for the posterior mucous membranes. No further doses should be given."
+                },
+                {
+                    question: "The parent of an infant with nasopharyngitis should be instructed to notify the health professional if the infant shows signs or symptoms of which condition?",
+                    options: [
+                        "Has a cough",
+                        "Becomes fussy",
+                        "Shows signs of an earache",
+                        "Has a fever higher than 37.5 C (99 F)"
+                    ],
+                    correct: 2,
+                    rationale: "If an infant with nasopharyngitis shows signs of an earache, it may indicate respiratory complications and possibly secondary bacterial infection. The health professional should be contacted to evaluate the infant. Cough can be a sign of nasopharyngitis. Irritability is common in an infant with a viral illness. Fever is common in viral illnesses."
+                },
+                {
+                    question: "It is important that a child with acute streptococcal pharyngitis be treated with antibiotics to prevent which condition?",
+                    options: [
+                        "Otitis media",
+                        "Diabetes insipidus (DI)",
+                        "Nephrotic syndrome",
+                        "Acute rheumatic fever"
+                    ],
+                    correct: 3,
+                    rationale: "Group A hemolytic streptococcal infection is a brief illness with varying symptoms. It is essential that pharyngitis caused by this organism be treated with appropriate antibiotics to avoid the sequelae of acute rheumatic fever and acute glomerulonephritis. The cause of otitis media is either viral or other bacterial organisms. DI is a disorder of the posterior pituitary. Infections such as meningitis or encephalitis, not streptococcal pharyngitis, can cause DI. Glomerulonephritis, not nephrotic syndrome, can result from acute streptococcal pharyngitis."
+                },
+                {
+                    question: "When caring for a child after a tonsillectomy, what intervention should the nurse do?",
+                    options: [
+                        "Watch for continuous swallowing.",
+                        "Encourage gargling to reduce discomfort.",
+                        "Apply warm compresses to the throat.",
+                        "Position the child on the back for sleeping."
+                    ],
+                    correct: 0,
+                    rationale: "Continuous swallowing, especially while sleeping, is an early sign of bleeding. The child swallows the blood that is trickling from the operative site. Gargling is discouraged because it could irritate the operative site. Ice compresses are recommended to reduce inflammation. The child should be positioned on the side or abdomen to facilitate drainage of secretions."
+                },
+                {
+                    question: "What statement best represents infectious mononucleosis?",
+                    options: [
+                        "Herpes simplex type 2 is the principal cause.",
+                        "A complete blood count shows a characteristic leukopenia.",
+                        "A short course of ampicillin is used when pharyngitis is present.",
+                        "Clinical signs and symptoms and blood tests are both needed to establish the diagnosis."
+                    ],
+                    correct: 3,
+                    rationale: "The characteristics of the disease—malaise, sore throat, lymphadenopathy, CNS manifestations, and skin lesions—are similar to presenting signs and symptoms in other diseases. Hematologic analysis (heterophil antibody and monospot) can help confirm the diagnosis. However, not all young children develop the expected laboratory findings. Herpes-like Epstein-Barr virus is the principal cause. Usually, an increase in lymphocytes is observed. Penicillin, not ampicillin, is indicated. Ampicillin is linked with a discrete macular eruption in infectious mononucleosis."
+                },
+                {
+                    question: "Parents bring their 15-month-old infant to the emergency department at 3:00 AM because the toddler has a temperature of 39 C (102.2 F), is crying inconsolably, and is tugging at the ears. A diagnosis of otitis media (OM) is made. In addition to antibiotic therapy, the nurse practitioner should instruct the parents to use what medication?",
+                    options: [
+                        "Decongestants to ease stuffy nose",
+                        "Antihistamines to help the child sleep",
+                        "Aspirin for pain and fever management",
+                        "Benzocaine ear drops for topical pain relief"
+                    ],
+                    correct: 3,
+                    rationale: "Analgesic ear drops can provide topical relief for the intense pain of OM. Decongestants and antihistamines are not recommended in the treatment of OM. Aspirin is contraindicated in young children because of the association with Reye syndrome."
+                },
+                {
+                    question: "An 18-month-old child is seen in the clinic with otitis media (OM). Oral amoxicillin is prescribed. What instructions should be given to the parent?",
+                    options: [
+                        "Administer all of the prescribed medication.",
+                        "Continue medication until all symptoms subside.",
+                        "Immediately stop giving medication if hearing loss develops.",
+                        "Stop giving medication and come to the clinic if fever is still present in 24 hours."
+                    ],
+                    correct: 0,
+                    rationale: "Antibiotics should be given for their full course to prevent recurrence of infection with resistant bacteria. Symptoms may subside before the full course is given. Hearing loss is a complication of OM; antibiotics should continue to be given. Medication may take 24 to 48 hours to make symptoms subside."
+                },
+                {
+                    question: "An infant's parents ask the nurse about preventing otitis media (OM). What information should be provided?",
+                    options: [
+                        "Avoid tobacco smoke.",
+                        "Use nasal decongestants.",
+                        "Avoid children with OM.",
+                        "Bottle- or breastfeed in a supine position."
+                    ],
+                    correct: 0,
+                    rationale: "Eliminating tobacco smoke from the child's environment is essential for preventing OM and other common childhood illnesses. Nasal decongestants are not useful in preventing OM. Children with uncomplicated OM are not contagious unless they show other symptoms of upper respiratory tract infection. Children should be fed in a semivertical position to prevent OM."
+                },
+                {
+                    question: "Chronic otitis media with effusion (OME) differs from acute otitis media (AOM) because it is usually characterized by which signs or symptoms?",
+                    options: [
+                        "Severe pain in the ear",
+                        "Anorexia and vomiting",
+                        "A feeling of fullness in the ear",
+                        "Fever as high as 40 C (104 F)"
+                    ],
+                    correct: 2,
+                    rationale: "OME is characterized by a feeling of fullness in the ear or other nonspecific complaints. OME does not cause severe pain. This may be a sign of AOM. Vomiting, anorexia, and fever are associated with AOM."
+                },
+                {
+                    question: "A 4-year-old girl is brought to the emergency department. She has a froglike croaking sound on inspiration, is agitated, and is drooling. She insists on sitting upright. The nurse should intervene in which manner?",
+                    options: [
+                        "Make her lie down and rest quietly.",
+                        "Examine her oral pharynx and report to the physician.",
+                        "Auscultate her lungs and prepare for placement in a mist tent.",
+                        "Notify the physician immediately and be prepared to assist with a tracheostomy or intubation."
+                    ],
+                    correct: 3,
+                    rationale: "This child is exhibiting signs of respiratory distress and possible epiglottitis. Epiglottitis is always a medical emergency requiring antibiotics and airway support for treatment. Sitting up is the position that facilitates breathing in respiratory disease. The oral pharynx should not be visualized. If the epiglottis is inflamed, there is the potential for complete obstruction if it is irritated further. Although lung auscultation provides useful assessment information, a mist tent would not be beneficial for this child. Immediate medical evaluation and intervention are indicated."
+                },
+                {
+                    question: "The nurse is assessing a child with croup in the emergency department. The child has a sore throat and is drooling. Examining the child's throat using a tongue depressor might precipitate what condition?",
+                    options: [
+                        "Sore throat",
+                        "Inspiratory stridor",
+                        "Complete obstruction",
+                        "Respiratory tract infection"
+                    ],
+                    correct: 2,
+                    rationale: "If a child has acute epiglottitis, examination of the throat may cause complete obstruction and should be performed only when immediate intubation can take place. Sore throat and pain on swallowing are early signs of epiglottitis. Stridor is aggravated when a child with epiglottitis is supine. Epiglottitis is caused by Haemophilus influenzae in the respiratory tract."
+                },
+                {
+                    question: "The mother of a 20-month-old boy tells the nurse that he has a barking cough at night. His temperature is 37 C (98.6 F). The nurse suspects mild croup and should recommend which intervention?",
+                    options: [
+                        "Admit to the hospital and observe for impending epiglottitis.",
+                        "Provide fluids that the child likes and use comfort measures.",
+                        "Control fever with acetaminophen and call if cough gets worse tonight.",
+                        "Try over-the-counter cough medicine and come to the clinic tomorrow if no improvement."
+                    ],
+                    correct: 1,
+                    rationale: "In mild croup, therapeutic interventions include adequate hydration (as long as the child can easily drink) and comfort measures to minimize distress. The child is not exhibiting signs of epiglottitis. A temperature of 37 C is within normal limits. Although a return to the clinic may be indicated, the mother is instructed to return if the child develops noisy respirations or drooling."
+                },
+                {
+                    question: "The nurse encourages the mother of a toddler with acute laryngotracheobronchitis to stay at the bedside as much as possible. What is the primary rationale for this action?",
+                    options: [
+                        "Mothers of hospitalized toddlers often experience guilt.",
+                        "The mother's presence will reduce anxiety and ease the child's respiratory efforts.",
+                        "Separation from the mother is a major developmental threat at this age.",
+                        "The mother can provide constant observations of the child's respiratory efforts."
+                    ],
+                    correct: 1,
+                    rationale: "The family's presence will decrease the child's distress. It is true that mothers of hospitalized toddlers often experience guilt and that separation from mother is a major developmental threat for toddlers, but the main reason to keep parents at the child's bedside is to ease anxiety and therefore respiratory effort."
+                },
+                {
+                    question: "An infant with bronchiolitis is hospitalized. The causative organism is respiratory syncytial virus (RSV). The nurse knows that a child infected with this virus requires what type of isolation?",
+                    options: [
+                        "Reverse isolation",
+                        "Airborne isolation",
+                        "Contact Precautions",
+                        "Standard Precautions"
+                    ],
+                    correct: 2,
+                    rationale: "RSV is transmitted through droplets. In addition to Standard Precautions and hand washing, Contact Precautions are required. Caregivers must use gloves and gowns when entering the room. Care is taken not to touch their own eyes or mucous membranes with a contaminated gloved hand. Children are placed in a private room or in a room with other children with RSV infections."
+                },
+                {
+                    question: "An infant has been diagnosed with staphylococcal pneumonia. Nursing care of the child with pneumonia includes which intervention?",
+                    options: [
+                        "Administration of antibiotics",
+                        "Frequent complete assessment of the infant",
+                        "Round-the-clock administration of antitussive agents",
+                        "Strict monitoring of intake and output to avoid congestive heart failure"
+                    ],
+                    correct: 0,
+                    rationale: "Antibiotics are indicated for bacterial pneumonia. Often the child has decreased pulmonary reserve, and clustering of care is essential. The child's respiratory rate and status and general disposition are monitored closely, but frequent complete physical assessments are not indicated. Antitussive agents are used sparingly. It is desirable for the child to cough up some of the secretions. Fluids are essential to keep secretions as liquefied as possible."
+                },
+                {
+                    question: "What consideration is most important in managing tuberculosis (TB) in children?",
+                    options: [
+                        "Skin testing",
+                        "Chemotherapy",
+                        "Adequate rest",
+                        "Adequate hydration"
+                    ],
+                    correct: 1,
+                    rationale: "Drug therapy for TB includes isoniazid, rifampin, and pyrazinamide daily for 2 months and isoniazid and rifampin given two or three times a week by direct observation therapy for the remaining 4 months. Chemotherapy is the most important intervention for TB."
+                },
+                {
+                    question: "A toddler has a unilateral foul-smelling nasal discharge and frequent sneezing. The nurse should suspect what condition?",
+                    options: [
+                        "Allergies",
+                        "Acute pharyngitis",
+                        "Foreign body in the nose",
+                        "Acute nasopharyngitis"
+                    ],
+                    correct: 2,
+                    rationale: "The irritation of a foreign body in the nose produces local mucosal swelling with foul-smelling nasal discharge, local obstruction with sneezing, and mild discomfort. Allergies would produce clear bilateral nasal discharge. Nasal discharge is usually not associated with pharyngitis. Acute nasopharyngitis would have bilateral mucous discharge."
+                },
+                {
+                    question: "The nurse is caring for a child with acute respiratory distress syndrome (ARDS) associated with sepsis. What nursing action should be included in the care of the child?",
+                    options: [
+                        "Force fluids.",
+                        "Monitor pulse oximetry.",
+                        "Institute seizure precautions.",
+                        "Encourage a high-protein diet."
+                    ],
+                    correct: 1,
+                    rationale: "Careful monitoring of oxygenation and cardiopulmonary status is an important evaluation tool in the care of the child with ARDS. Maintenance of vascular volume and hydration is important and should be done parenterally. Seizures are not a side effect of ARDS. Adequate nutrition is necessary, but a high-protein diet is not helpful."
+                },
+                {
+                    question: "The nurse is caring for a child with carbon monoxide (CO) poisoning associated with smoke inhalation. What intervention is essential in this child's care?",
+                    options: [
+                        "Monitor pulse oximetry.",
+                        "Monitor arterial blood gases.",
+                        "Administer oxygen if respiratory distress develops.",
+                        "Administer oxygen if child's lips become bright, cherry-red in color."
+                    ],
+                    correct: 1,
+                    rationale: "Arterial blood gases are the best way to monitor CO poisoning. Pulse oximetry is contraindicated in the case of CO poisoning because the PaO2 may be normal. One hundred percent oxygen should be given as quickly as possible, not only if respiratory distress or other symptoms develop."
+                },
+                {
+                    question: "What diagnostic test for allergies involves the injection of specific allergens?",
+                    options: [
+                        "Phadiatop",
+                        "Skin testing",
+                        "Radioallergosorbent tests (RAST)",
+                        "Blood examination for total immunoglobulin E (IgE)"
+                    ],
+                    correct: 1,
+                    rationale: "Skin testing is the most commonly used diagnostic test for allergy. A specific allergen is injected under the skin, and after a suitable time, the size of the resultant wheal is measured to determine the patient's sensitivity."
+                },
+                {
+                    question: "What statement is the most descriptive of asthma?",
+                    options: [
+                        "It is inherited.",
+                        "There is heightened airway reactivity.",
+                        "There is decreased resistance in the airway.",
+                        "The single cause of asthma is an allergic hypersensitivity."
+                    ],
+                    correct: 1,
+                    rationale: "In asthma, spasm of the smooth muscle of the bronchi and bronchioles causes constriction, producing impaired respiratory function. Atopy, or development of an immunoglobulin E (IgE)-mediated response, is inherited but is not the only cause of asthma. Asthma is characterized by increased resistance in the airway. Asthma has multiple causes, including allergens, irritants, exercise, cold air, infections, medications, medical conditions, and endocrine factors."
+                },
+                {
+                    question: "What condition is the leading cause of chronic illness in children?",
+                    options: [
+                        "Asthma",
+                        "Pertussis",
+                        "Tuberculosis",
+                        "Cystic fibrosis"
+                    ],
+                    correct: 0,
+                    rationale: "Asthma is the most common chronic disease of childhood, the primary cause of school absences, and the third leading cause of hospitalization in children younger than the age of 15 years."
+                },
+                {
+                    question: "A child has a chronic cough and diffuse wheezing during the expiratory phase of respiration. This suggests what condition?",
+                    options: [
+                        "Asthma",
+                        "Pneumonia",
+                        "Bronchiolitis",
+                        "Foreign body in trachea"
+                    ],
+                    correct: 0,
+                    rationale: "Asthma may have these chronic signs and symptoms. Pneumonia appears with an acute onset, fever, and general malaise. Bronchiolitis is an acute condition caused by respiratory syncytial virus. Foreign body in the trachea occurs with acute respiratory distress or failure and maybe stridor."
+                },
+                {
+                    question: "A child with asthma is having pulmonary function tests. What rationale explains the purpose of the peak expiratory flow rate?",
+                    options: [
+                        "To assess severity of asthma",
+                        "To determine cause of asthma",
+                        "To identify triggers of asthma",
+                        "To confirm diagnosis of asthma"
+                    ],
+                    correct: 0,
+                    rationale: "Peak expiratory flow rate monitoring is used to monitor the child's current pulmonary function. It can be used to manage exacerbations and for daily long-term management. The cause of asthma is known. Asthma is caused by a complex interaction among inflammatory cells, mediators, and the cells and tissues present in the airways. The triggers of asthma are determined through history taking and immunologic and other testing. The diagnosis of asthma is made through clinical manifestations, history, physical examination, and laboratory testing."
+                },
+                {
+                    question: "Children who are taking long-term inhaled steroids should be assessed frequently for what potential complication?",
+                    options: [
+                        "Cough",
+                        "Osteoporosis",
+                        "Slowed growth",
+                        "Cushing syndrome"
+                    ],
+                    correct: 2,
+                    rationale: "The growth of children on long-term inhaled steroids should be assessed frequently to evaluate systemic effects of these drugs. Cough is prevented by inhaled steroids. No evidence exists that inhaled steroids cause osteoporosis. Cushing syndrome is caused by long-term systemic steroids."
+                },
+                {
+                    question: "One of the goals for children with asthma is to maintain the child's normal functioning. What principle of treatment helps to accomplish this goal?",
+                    options: [
+                        "Limit participation in sports.",
+                        "Reduce underlying inflammation.",
+                        "Minimize use of pharmacologic agents.",
+                        "Have yearly evaluations by a health care provider."
+                    ],
+                    correct: 1,
+                    rationale: "Children with asthma are often excluded from exercise. This practice interferes with peer interaction and physical health. Most children with asthma can participate provided their asthma is under control. Inflammation is the underlying cause of the symptoms of asthma. By decreasing inflammation and reducing the symptomatic airway narrowing, health care providers can minimize exacerbations."
+                },
+                {
+                    question: "What drug is usually given first in the emergency treatment of an acute, severe asthma episode in a young child?",
+                    options: [
+                        "Ephedrine",
+                        "Theophylline",
+                        "Aminophylline",
+                        "Short-acting β2-agonists"
+                    ],
+                    correct: 3,
+                    rationale: "Short-acting β2-agonists are the first treatment in an acute asthma exacerbation. Ephedrine and aminophylline are not helpful in acute asthma exacerbations. Theophylline is unnecessary for treating asthma exacerbations."
+                },
+                {
+                    question: "Cystic fibrosis (CF) may affect single or multiple systems of the body. What is the primary factor responsible for possible multiple clinical manifestations in CF?",
+                    options: [
+                        "Hyperactivity of sweat glands",
+                        "Hypoactivity of autonomic nervous system",
+                        "Atrophic changes in mucosal wall of intestines",
+                        "Mechanical obstruction caused by increased viscosity of mucous gland secretions"
+                    ],
+                    correct: 3,
+                    rationale: "The mucous glands produce a thick mucoprotein that accumulates and results in dilation. Small passages in organs such as the pancreas and bronchioles become obstructed as secretions form concretions in the glands and ducts."
+                },
+                {
+                    question: "What is the earliest recognizable clinical manifestation(s) of cystic fibrosis (CF)?",
+                    options: [
+                        "Meconium ileus",
+                        "History of poor intestinal absorption",
+                        "Foul-smelling, frothy, greasy stools",
+                        "Recurrent pneumonia and lung infections"
+                    ],
+                    correct: 0,
+                    rationale: "The earliest clinical manifestation of CF is a meconium ileus, which is found in about 10% of children with CF. Clinical manifestations include abdominal distention, vomiting, failure to pass stools, and rapid development of dehydration."
+                },
+                {
+                    question: "What tests aid in the diagnosis of cystic fibrosis (CF)?",
+                    options: [
+                        "Sweat test, stool for fat, chest radiography",
+                        "Sweat test, bronchoscopy, duodenal fluid analysis",
+                        "Sweat test, stool for trypsin, biopsy of intestinal mucosa",
+                        "Stool for fat, gastric contents for hydrochloride, radiography"
+                    ],
+                    correct: 0,
+                    rationale: "A sweat test result of greater than 60 mEq/L is diagnostic of CF, a high level of fecal fat is a gastrointestinal manifestation of CF, and a chest radiograph showing patchy atelectasis and obstructive emphysema indicates CF."
+                },
+                {
+                    question: "A child with cystic fibrosis (CF) receives aerosolized bronchodilator medication. When should this medication be administered?",
+                    options: [
+                        "After chest physiotherapy (CPT)",
+                        "Before chest physiotherapy (CPT)",
+                        "After receiving 100% oxygen",
+                        "Before receiving 100% oxygen"
+                    ],
+                    correct: 1,
+                    rationale: "Bronchodilators should be given before CPT to open bronchi and make expectoration easier. These medications are not helpful when used after CPT. Oxygen is administered only in acute episodes, with caution, because of chronic carbon dioxide retention."
+                },
+                {
+                    question: "A child with cystic fibrosis is receiving recombinant human deoxyribonuclease (DNase). What statement about DNase is true?",
+                    options: [
+                        "Given subcutaneously",
+                        "May cause voice alterations",
+                        "May cause mucus to thicken",
+                        "Not indicated for children younger than age 12 years"
+                    ],
+                    correct: 1,
+                    rationale: "One of the only adverse effects of DNase is voice alterations and laryngitis. DNase is given in an aerosolized form, decreases the viscosity of mucus, and is safe for children younger than 12 years."
+                },
+                {
+                    question: "The parent of a child with cystic fibrosis (CF) calls the clinic nurse to report that the child has developed tachypnea, tachycardia, dyspnea, pallor, and cyanosis. The nurse should tell the parent to bring the child to the clinic because these signs and symptoms are suggestive of what condition?",
+                    options: [
+                        "Pneumothorax",
+                        "Bronchodilation",
+                        "Carbon dioxide retention",
+                        "Increased viscosity of sputum"
+                    ],
+                    correct: 0,
+                    rationale: "Usually the signs of pneumothorax are nonspecific. Tachypnea, tachycardia, dyspnea, pallor, and cyanosis are significant signs and symptoms and are indicative of respiratory distress caused by pneumothorax."
+                },
+                {
+                    question: "Pancreatic enzymes are administered to the child with cystic fibrosis. What nursing consideration should be included in the plan of care?",
+                    options: [
+                        "Give pancreatic enzymes between meals if at all possible.",
+                        "Do not administer pancreatic enzymes if the child is receiving antibiotics.",
+                        "Decrease the dose of pancreatic enzymes if the child is having frequent, bulky stools.",
+                        "Pancreatic enzymes can be swallowed whole or sprinkled on a small amount of food taken at the beginning of a meal."
+                    ],
+                    correct: 3,
+                    rationale: "Enzymes may be administered in a small amount of cereal or fruit at the beginning of a meal or swallowed whole. Enzymes should be given just before meals and snacks. Pancreatic enzymes are not a contraindication for antibiotics. The dose of enzymes should be increased if child is having frequent, bulky stools."
+                },
+                {
+                    question: "The nurse is giving discharge instructions to the parents of a 5-year-old child who had a tonsillectomy 4 hours ago. What statement by the parent indicates a correct understanding of the teaching?",
+                    options: [
+                        "I can use an ice collar on my child for pain control along with analgesics.",
+                        "My child should clear the throat frequently to clear the secretions.",
+                        "I should allow my child to be as active as tolerated.",
+                        "My child should gargle and brush teeth at least three times per day."
+                    ],
+                    correct: 0,
+                    rationale: "Pain control after a tonsillectomy can be achieved with application of an ice collar and administration of analgesics. The child should avoid clearing the throat or coughing and does not need to gargle and brush teeth a certain number of times per day and should avoid vigorous gargling and toothbrushing. Also, the child's activity should be limited to decrease the potential for bleeding, at least for the first few days."
+                },
+                {
+                    question: "A child is admitted with acute laryngotracheobronchitis (LTB). The child will most likely be treated with which?",
+                    options: [
+                        "Racemic epinephrine and corticosteroids",
+                        "Nebulizer treatments and oxygen",
+                        "Antibiotics and albuterol",
+                        "Chest physiotherapy and humidity"
+                    ],
+                    correct: 0,
+                    rationale: "Nebulized epinephrine (racemic epinephrine) is now used in children with LTB that is not alleviated with cool mist. The beta-adrenergic effects cause mucosal vasoconstriction and subsequent decreased subglottic edema. The use of corticosteroids is beneficial because the anti-inflammatory effects decrease subglottic edema."
+                },
+                {
+                    question: "A 6-year-old child has had a tonsillectomy. The child is spitting up small amounts of dark brown blood in the immediate postoperative period. The nurse should take what action?",
+                    options: [
+                        "Notify the health care provider.",
+                        "Continue to assess for bleeding.",
+                        "Give the child a red flavored ice pop.",
+                        "Position the child in a Trendelenburg position."
+                    ],
+                    correct: 1,
+                    rationale: "Some secretions, particularly dried blood from surgery, are common after a tonsillectomy. Inspect all secretions and vomitus for evidence of fresh bleeding (some blood-tinged mucus is expected). Dark brown (old) blood is usually present in the emesis, as well as in the nose and between the teeth. Small amounts of dark brown blood should be further monitored."
+                },
+                {
+                    question: "A 3-year-old child is experiencing pain after a tonsillectomy. The child has not taken in any fluids and does not want to drink anything, saying, 'My tummy hurts.' The following health care prescriptions are available: acetaminophen (Tylenol) PO (orally) or PR (rectally) PRN, ice chips, clear liquids. What should the nurse implement to relieve the child's pain?",
+                    options: [
+                        "Ice chips",
+                        "Tylenol PO",
+                        "Tylenol PR",
+                        "Popsicle"
+                    ],
+                    correct: 2,
+                    rationale: "The throat is very sore after a tonsillectomy. Most children experience moderate pain after a tonsillectomy and need pain medication at regular intervals for at least the first 24 hours. Analgesics may need to be given rectally or intravenously to avoid the oral route."
+                },
+                {
+                    question: "A 1-year-old child has acute otitis media (AOM) and is being treated with oral antibiotics. What should the nurse include in the discharge teaching to the infant's parents?",
+                    options: [
+                        "A follow-up visit should be done after all medicine has been given.",
+                        "After an episode of acute otitis media, hearing loss usually occurs.",
+                        "Tylenol should not be given because it may mask symptoms.",
+                        "The infant will probably need a myringotomy procedure and tubes."
+                    ],
+                    correct: 0,
+                    rationale: "Children with AOM should be seen after antibiotic therapy is complete to evaluate the effectiveness of the treatment and to identify potential complications, such as effusion or hearing impairment. Hearing loss does not usually occur with acute otitis media. Tylenol should be given for pain, and the infant will not necessarily need a myringotomy procedure."
+                },
+                {
+                    question: "What do the initial signs of respiratory syncytial virus (RSV) infection in an infant include?",
+                    options: [
+                        "Rhinorrhea, wheezing, and fever",
+                        "Tachypnea, cyanosis, and apnea",
+                        "Retractions, fever, and listlessness",
+                        "Poor breath sounds and air hunger"
+                    ],
+                    correct: 0,
+                    rationale: "Symptoms such as rhinorrhea and a low-grade fever often appear first. OM and conjunctivitis may also be present. In time, a cough may develop. Wheezing is an initial sign as well. Progression of illness brings on the symptoms of tachypnea, retractions, poor breath sounds, cyanosis, air hunger, and apnea."
+                },
+                {
+                    question: "The nurse is caring for a 1-month-old infant with respiratory syncytial virus (RSV) who is receiving 23% oxygen via a plastic hood. The child's SaO2 saturation is 88%, respiratory rate is 45 breaths/min, and pulse is 140 beats/min. Based on these assessments, what action should the nurse take?",
+                    options: [
+                        "Withhold feedings.",
+                        "Notify the health care provider.",
+                        "Put the infant in an infant seat.",
+                        "Keep the infant in the plastic hood."
+                    ],
+                    correct: 1,
+                    rationale: "The American Academy of Pediatrics practice parameter (2006) recommends the use of supplemental oxygen if the infant fails to maintain a consistent oxygen saturation of at least 90%. The health care provider should be notified of the saturation reading of 88%."
+                },
+                {
+                    question: "A 5-year-old child is admitted with bacterial pneumonia. What signs and symptoms should the nurse expect to assess with this disease process?",
+                    options: [
+                        "Fever, cough, and chest pain",
+                        "Stridor, wheezing, and ear infection",
+                        "Nasal discharge, headache, and cough",
+                        "Pharyngitis, intermittent fever, and eye infection"
+                    ],
+                    correct: 0,
+                    rationale: "Children with bacterial pneumonia usually appear ill. Symptoms include fever, malaise, rapid and shallow respirations, cough, and chest pain."
+                },
+                {
+                    question: "An infant with a congenital heart defect is to receive a dose of palivizumab (Synagis). What is the purpose of this?",
+                    options: [
+                        "Prevent RSV infection.",
+                        "Prevent secondary bacterial infection.",
+                        "Decrease toxicity of antiviral agents.",
+                        "Make isolation of infant with RSV unnecessary."
+                    ],
+                    correct: 0,
+                    rationale: "The only product available in the United States for prevention of RSV is palivizumab, a humanized mouse monoclonal antibody, which is given once every 30 days (15 mg/kg) between November and March. It is given to high-risk infants, which includes an infant with a congenital heart defect."
+                },
+                {
+                    question: "A 3-year-old is brought to the emergency department with symptoms of stridor, fever, restlessness, and drooling. No coughing is observed. Based on these findings, the nurse should be prepared to assist with what action?",
+                    options: [
+                        "Throat culture",
+                        "Nasal pharynx washing",
+                        "Administration of corticosteroids",
+                        "Emergency intubation"
+                    ],
+                    correct: 3,
+                    rationale: "Three clinical observations that are predictive of epiglottitis are absence of spontaneous cough, presence of drooling, and agitation. Nasotracheal intubation or tracheostomy is usually considered for a child with epiglottitis with severe respiratory distress."
+                },
+                {
+                    question: "A 3-year-old child woke up in the middle of the night with a croupy cough and inspiratory stridor. The parents bring the child to the emergency department, but by the time they arrive, the cough is gone, and the stridor has resolved. What can the nurse teach the parents with regard to this type of croup?",
+                    options: [
+                        "A bath in tepid water can help resolve this type of croup.",
+                        "Tylenol can help to relieve the cough and stridor.",
+                        "A cool mist vaporizer at the bedside can help prevent this type of croup.",
+                        "Antibiotics need to be given to reduce the inflammation."
+                    ],
+                    correct: 2,
+                    rationale: "Acute spasmodic laryngitis (spasmodic croup, midnight croup, or twilight croup) is distinct from laryngitis and LTB and characterized by paroxysmal attacks of laryngeal obstruction that occur chiefly at night. Children with spasmodic croup are managed at home. Cool mist is recommended for the child's room."
+                },
+                {
+                    question: "A 3-month-old infant is admitted to the pediatric unit for treatment of bronchiolitis. The infant's vital signs are T, 101.6 F; P, 106 beats/min apical; and R, 70 breaths/min. The infant is irritable and fussy and coughs frequently. IV fluids are given via a peripheral venipuncture. Fluids by mouth were initially contraindicated for what reason?",
+                    options: [
+                        "Tachypnea",
+                        "Paroxysmal cough",
+                        "Irritability",
+                        "Fever"
+                    ],
+                    correct: 0,
+                    rationale: "Fluids by mouth may be contraindicated because of tachypnea, weakness, and fatigue. Therefore, IV fluids are preferred until the acute stage of bronchiolitis has passed."
+                },
+                {
+                    question: "A child is in the hospital for cystic fibrosis. What health care provider's prescription should the nurse clarify before implementing?",
+                    options: [
+                        "Dornase alfa (Pulmozyme) nebulizer treatment bid",
+                        "Pancreatic enzymes every 6 hours",
+                        "Vitamin A, D, E, and K supplements daily",
+                        "Proventil (albuterol) nebulizer treatments tid"
+                    ],
+                    correct: 1,
+                    rationale: "The principal treatment for pancreatic insufficiency that occurs in cystic fibrosis is replacement of pancreatic enzymes, which are administered with meals and snacks to ensure that digestive enzymes are mixed with food in the duodenum. The enzymes should not be given every 6 hours, so this should be clarified before implementing this prescription."
+                },
+                {
+                    question: "A 6-year-old child is in the hospital for status asthmaticus. Nursing care during this acute period includes which prescribed interventions?",
+                    options: [
+                        "Prednisolone (Pediapred) PO every day, IV fluids, cromolyn (Intal) inhaler bid",
+                        "Salmeterol (Serevent) PO bid, vital signs every 4 hours, spot check pulse oximetry",
+                        "Triamcinolone (Azmacort) inhaler bid, continuous pulse oximetry, vital signs once a shift",
+                        "Methylprednisolone (Solumedrol) IV every 12 hours, continuous pulse oximetry, albuterol nebulizer treatments every 4 hours and prn"
+                    ],
+                    correct: 3,
+                    rationale: "The child in status asthmaticus should be placed on continuous cardiorespiratory (including blood pressure) and pulse oximetry monitoring. A systemic corticosteroid (oral, IV, or IM) may also be given to decrease the effects of inflammation. Inhaled aerosolized short-acting β2-agonists are recommended for all patients."
+                },
+                {
+                    question: "In providing nourishment for a child with cystic fibrosis (CF), what factors should the nurse keep in mind?",
+                    options: [
+                        "Fats and proteins must be greatly curtailed.",
+                        "Most fruits and vegetables are not well tolerated.",
+                        "Diet should be high in calories, proteins, and unrestricted fats.",
+                        "Diet should be low fat but high in calories and proteins."
+                    ],
+                    correct: 2,
+                    rationale: "Children with CF require a well-balanced, high-protein, high-caloric diet, with unrestricted fat (because of the impaired intestinal absorption)."
+                },
+                {
+                    question: "A quantitative sweat chloride test has been done on an 8-month-old child. What value should be indicative of cystic fibrosis (CF)?",
+                    options: [
+                        "Less than 18 mEq/L",
+                        "18 to 40 mEq/L",
+                        "40 to 60 mEq/L",
+                        "Greater than 60 mEq/L"
+                    ],
+                    correct: 3,
+                    rationale: "Normally sweat chloride content is less than 40 mEq/L, with a mean of 18 mEq/L. A chloride concentration greater than 60 mEq/L is diagnostic of CF; in infants younger than 3 months, a sweat chloride concentration greater than 40 mEq/L is highly suggestive of CF."
+                },
+                {
+                    question: "A preschool child has asthma, and a goal is to extend expiratory time and increase expiratory effectiveness. What action should the nurse implement to meet this goal?",
+                    options: [
+                        "Encourage increased fluid intake.",
+                        "Recommend increased use of a budesonide (Pulmicort) inhaler.",
+                        "Administer an antitussive to suppress coughing.",
+                        "Encourage the child to blow a pinwheel every 6 hours while awake."
+                    ],
+                    correct: 3,
+                    rationale: "Play techniques that can be used for younger children to extend their expiratory time and increase expiratory pressure include blowing cotton balls or a ping-pong ball on a table, blowing a pinwheel, blowing bubbles, or preventing a tissue from falling by blowing it against the wall."
+                },
+                {
+                    question: "A school-age child has asthma. The nurse should teach the child that if a peak expiratory flow rate is in the yellow zone, this means that the asthma control is what?",
+                    options: [
+                        "80% of a personal best, and the routine treatment plan can be followed.",
+                        "50% to 79% of a personal best and needs an increase in the usual therapy.",
+                        "50% of a personal best and needs immediate emergency bronchodilators.",
+                        "Less than 50% of a personal best and needs immediate hospitalization."
+                    ],
+                    correct: 1,
+                    rationale: "The interpretation of a peak expiratory flow rate that is yellow (50%-79% of personal best) signals caution. Asthma is not well controlled. An acute exacerbation may be present. Maintenance therapy may need to be increased. Call the practitioner if the child stays in this zone."
+                },
+                {
+                    question: "A family requires home care teaching with regard to preventative measures to use at home to avoid an asthmatic episode. What strategy should the nurse teach?",
+                    options: [
+                        "Use a humidifier in the child's room.",
+                        "Launder bedding daily in cold water.",
+                        "Replace wood flooring with carpet.",
+                        "Use an indoor air purifier with HEPA filter."
+                    ],
+                    correct: 3,
+                    rationale: "Allergen control includes use of an indoor air purifier with HEPA filter. Humidity should be kept low, bedding laundered in hot water once a week, and carpet replaced with wood floors."
+                },
+                {
+                    question: "A school-age child with cystic fibrosis takes four enzyme capsules with meals. The child is having four or five bowel movements per day. The nurse's action in regard to the pancreatic enzymes is based on the knowledge that the dosage is what?",
+                    options: [
+                        "Adequate",
+                        "Adequate but should be taken between meals",
+                        "Needs to be increased to increase the number of bowel movements per day",
+                        "Needs to be increased to decrease the number of bowel movements per day"
+                    ],
+                    correct: 3,
+                    rationale: "The amount of enzyme is adjusted to achieve normal growth and a decrease in the number of stools to one or two per day."
+                },
+                {
+                    question: "A term infant is delivered, and before delivery, the medical team was notified that a congenital diaphragmatic hernia (CDH) was diagnosed on ultrasonography. What should be done immediately at birth if respiratory distress is noted?",
+                    options: [
+                        "Give oxygen.",
+                        "Suction the infant.",
+                        "Intubate the infant.",
+                        "Ventilate the infant with a bag and mask."
+                    ],
+                    correct: 2,
+                    rationale: "Many infants with a CDH require immediate respiratory assistance, which includes endotracheal intubation and GI decompression with a double-lumen catheter to prevent further respiratory compromise. At birth, bag and mask ventilation is contraindicated to prevent air from entering the stomach and especially the intestines, further compromising pulmonary function."
+                },
+                {
+                    question: "A child has a streptococcal throat infection and is being treated with antibiotics. What should the nurse teach the parents to prevent infection of others?",
+                    options: [
+                        "The child can return to school immediately.",
+                        "The organism cannot be transmitted through contact.",
+                        "The child can return to school after taking antibiotics for 24 hours.",
+                        "The organism can only be transmitted if someone uses a personal item of the sick child."
+                    ],
+                    correct: 2,
+                    rationale: "Children with streptococcal infection are noninfectious to others 24 hours after initiation of antibiotic therapy. It is generally recommended that children not return to school or daycare until they have been taking antibiotics for a full 24-hour period."
+                },
+                {
+                    question: "What medication is contraindicated in children post tonsillectomy and adenoidectomy?",
+                    options: [
+                        "Codeine",
+                        "Ondansetron (Zofran)",
+                        "Amoxil (amoxicillin)",
+                        "Acetaminophen (Tylenol)"
+                    ],
+                    correct: 0,
+                    rationale: "Codeine is contraindicated in pediatric patients after tonsillectomy and adenoidectomy. In 2012, the Food and Drug Administration issued a Drug Safety Communication that codeine use in certain children after tonsillectomy or adenoidectomy may lead to rare but life-threatening adverse events or death."
+                }
+            ],
+            
+            'calculations': [
+                {
+                    question: "The nurse is calculating the expected urinary output for a 24‑hour period for a child who weighs 22 lb, using the formula 1 mL/kg/hr. What is the expected 24‑hour urinary output in mL?",
+                    options: ["200 mL", "220 mL", "240 mL", "260 mL"],
+                    correct: 2,
+                    rationale: "22 lb ÷ 2.2 = 10 kg. 10 kg × 1 mL/kg/hr × 24 hr = 240 mL"
+                },
+                {
+                    question: "The nurse is calculating the expected urinary output for a 24‑hour period for a child who weighs 33 lb, using the formula 1 mL/kg/hr. What is the expected 24‑hour urinary output in mL?",
+                    options: ["300 mL", "330 mL", "360 mL", "390 mL"],
+                    correct: 2,
+                    rationale: "33 lb ÷ 2.2 = 15 kg. 15 kg × 1 mL/kg/hr × 24 hr = 360 mL"
+                },
+                {
+                    question: "The health care provider prescribes ceftazidime (Fortaz) 75 mg IVPB every 8 hours. The medication arrives in a 100 mL bag with instructions to infuse over 30 minutes. At what rate (mL/hr) should the nurse set the IV pump?",
+                    options: ["150 mL/hr", "200 mL/hr", "250 mL/hr", "300 mL/hr"],
+                    correct: 1,
+                    rationale: "Rate (mL/hr) = Volume (mL) ÷ Time (hr). 30 min = 0.5 hr. 100 mL ÷ 0.5 hr = 200 mL/hr"
+                },
+                {
+                    question: "The health care provider prescribes vancomycin 200 mg IVPB every 6 hours. The medication arrives in a 150 mL bag with instructions to infuse over 120 minutes. At what rate (mL/hr) should the nurse set the IV pump?",
+                    options: ["50 mL/hr", "75 mL/hr", "100 mL/hr", "120 mL/hr"],
+                    correct: 1,
+                    rationale: "120 minutes = 2 hours. Rate = 150 mL ÷ 2 hr = 75 mL/hr"
+                }
+            ],
+            
+            'all': []
+        };
+
+        // Combine all questions for the 'all' section
+        sections['all'] = [
+            ...sections['multiple-choice'].map(q => ({...q, section: 'multiple-choice'})),
+            ...sections['calculations'].map(q => ({...q, section: 'calculations', isCalculation: true}))
+        ];
+
+        let currentSection = 'multiple-choice';
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let selectedOptions = [];
+        let isSubmitted = false;
+        let answers = {
+            'multiple-choice': Array(sections['multiple-choice'].length).fill(null),
+            'calculations': Array(sections['calculations'].length).fill(null),
+            'all': Array(sections['all'].length).fill(null)
+        };
+
+        function setSection(section) {
+            currentSection = section;
+            currentQuestion = 0;
+            selectedOption = null;
+            selectedOptions = [];
+            isSubmitted = false;
+            
+            document.querySelectorAll('.section-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            loadQuestion();
+        }
+
+        function getCurrentQuestionData() {
+            if (currentSection === 'all') {
+                return sections['all'][currentQuestion] || null;
+            } else {
+                return sections[currentSection][currentQuestion];
+            }
+        }
+
+        function loadQuestion() {
+            const questionData = getCurrentQuestionData();
+            
+            if (!questionData) return;
+            
+            // Hide matching container (not used in this chapter)
+            document.getElementById('matchingContainer').style.display = 'none';
+            document.getElementById('options').style.display = 'flex';
+            document.getElementById('multipleSelectIndicator').style.display = 'none';
+            document.getElementById('multipleSelectInstructions').style.display = 'none';
+            document.getElementById('cancelBtn').classList.remove('show');
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('questionNumber').textContent = currentQuestion + 1;
+            
+            let totalQuestions = getTotalQuestions();
+            
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('counter').textContent = `${currentQuestion + 1}/${totalQuestions}`;
+            
+            document.getElementById('question').textContent = questionData.question;
+            loadOptions(questionData);
+            
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('rationale').classList.remove('show');
+            
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            const isLastQuestion = currentQuestion >= totalQuestions - 1;
+            document.getElementById('nextBtn').textContent = isLastQuestion ? 'Finish ➡️' : 'Next ➡️';
+            document.getElementById('nextBtn').disabled = true;
+            
+            // Load saved answer state
+            const storedAnswer = answers[currentSection][currentQuestion];
+            if (storedAnswer !== null && storedAnswer !== undefined) {
+                selectedOption = storedAnswer;
+                highlightSelectedOption(storedAnswer, questionData);
+                showFeedback(storedAnswer, questionData);
+                document.getElementById('nextBtn').disabled = false;
+                document.getElementById('cancelBtn').classList.add('show');
+            } else {
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+            }
+        }
+
+        function loadOptions(questionData) {
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            if (questionData.options && questionData.options.length > 0) {
+                questionData.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'option';
+                    optionElement.innerHTML = `
+                        <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                        <div class="option-text">${option}</div>
+                    `;
+                    optionElement.onclick = () => selectOption(index, questionData);
+                    optionsContainer.appendChild(optionElement);
+                });
+            } else {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">A</div>
+                    <div class="option-text">No options available for this question</div>
+                `;
+                optionsContainer.appendChild(optionElement);
+            }
+        }
+
+        function selectOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            answers[currentSection][currentQuestion] = index;
+            selectedOption = index;
+            
+            highlightSelectedOption(index, questionData);
+            showFeedback(index, questionData);
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('cancelBtn').classList.add('show');
+        }
+
+        function highlightSelectedOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                
+                if (i === index) {
+                    if (i === questionData.correct) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                        if (questionData.correct !== undefined) {
+                            options[questionData.correct].classList.add('correct');
+                        }
+                    }
+                }
+            });
+        }
+
+        function showFeedback(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackText = document.getElementById('feedbackText');
+            const rationale = document.getElementById('rationale');
+            const rationaleText = document.getElementById('rationaleText');
+            
+            if (index === questionData.correct) {
+                feedback.className = 'feedback correct';
+                feedbackIcon.textContent = '✅';
+                feedbackText.textContent = 'Correct! Well done.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '❌';
+                const correctLetter = String.fromCharCode(65 + questionData.correct);
+                feedbackText.textContent = `Incorrect. Correct: ${correctLetter}`;
+            }
+            
+            feedback.style.display = 'flex';
+            rationaleText.textContent = questionData.rationale;
+            rationale.classList.add('show');
+        }
+
+        function cancelSelection() {
+            const questionData = getCurrentQuestionData();
+            
+            answers[currentSection][currentQuestion] = null;
+            selectedOption = null;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('rationale').classList.remove('show');
+            document.getElementById('nextBtn').disabled = true;
+            document.getElementById('cancelBtn').classList.remove('show');
+        }
+
+        function nextCard() {
+            const totalQuestions = getTotalQuestions();
+            
+            if (currentQuestion < totalQuestions - 1) {
+                currentQuestion++;
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+                loadQuestion();
+            } else {
+                let correctCount = 0;
+                let totalAnswered = 0;
+                
+                Object.keys(answers).forEach(section => {
+                    answers[section].forEach((answer, index) => {
+                        if (answer !== null && answer !== undefined) {
+                            totalAnswered++;
+                            const questionData = getQuestionData(section, index);
+                            
+                            if (questionData?.isCalculation || questionData?.section === 'calculations') {
+                                if (answer === questionData.correct) correctCount++;
+                            } else {
+                                if (answer === questionData?.correct) correctCount++;
+                            }
+                        }
+                    });
+                });
+                
+                alert(`Quiz completed!\n\nAnswered: ${totalAnswered}\nCorrect: ${correctCount}\n\nClick OK to restart.`);
+                
+                currentSection = 'multiple-choice';
+                currentQuestion = 0;
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+                answers = {
+                    'multiple-choice': Array(sections['multiple-choice'].length).fill(null),
+                    'calculations': Array(sections['calculations'].length).fill(null),
+                    'all': Array(sections['all'].length).fill(null)
+                };
+                
+                setSection('multiple-choice');
+            }
+        }
+
+        function previousCard() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                const storedAnswer = answers[currentSection][currentQuestion];
+                
+                selectedOption = storedAnswer;
+                
+                loadQuestion();
+            }
+        }
+
+        function getTotalQuestions() {
+            if (currentSection === 'all') {
+                return sections['all'].length;
+            } else {
+                return sections[currentSection].length;
+            }
+        }
+
+        function getQuestionData(section, index) {
+            if (section === 'all') {
+                return sections['all'][index];
+            } else {
+                return sections[section][index];
+            }
+        }
+
+        // Initialize
+        setSection('multiple-choice');
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.key >= '1' && event.key <= '4') {
+                const index = parseInt(event.key) - 1;
+                const questionData = getCurrentQuestionData();
+                selectOption(index, questionData);
+            } else if (event.key >= 'a' && event.key <= 'd') {
+                const index = event.key.charCodeAt(0) - 97;
+                const questionData = getCurrentQuestionData();
+                selectOption(index, questionData);
+            } else if (event.key === 'ArrowLeft') {
+                if (!document.getElementById('prevBtn').disabled) {
+                    previousCard();
+                }
+            } else if (event.key === 'ArrowRight') {
+                if (!document.getElementById('nextBtn').disabled) {
+                    nextCard();
+                }
+            } else if (event.key === ' ' || event.key === 'Spacebar') {
+                if (!document.getElementById('nextBtn').disabled) {
+                    nextCard();
+                }
+            } else if (event.key === 'Escape') {
+                cancelSelection();
+            }
+        });
+    </script>
+</body>
+</html>
